@@ -83,9 +83,7 @@ button.addEventListener("click", async () => {
 
     const device =
       await navigator.bluetooth.requestDevice({
-        filters: [
-          { name: "SPEED_CHECKER" }
-        ],
+       acceptAllDevices: true,
         optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
       });
 
