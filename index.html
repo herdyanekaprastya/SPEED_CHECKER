@@ -86,17 +86,17 @@ button.addEventListener("click", async () => {
         filters: [
           { name: "SPEED_CHECKER" }
         ],
-        optionalServices: ["1234"]
+        optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
       });
 
     const server =
       await device.gatt.connect();
 
     const service =
-      await server.getPrimaryService("1234");
+      await server.getPrimaryService("12345678-1234-1234-1234-1234567890ab");
 
     const characteristic =
-      await service.getCharacteristic("ABCD");
+      await service.getCharacteristic("abcd1234-5678-1234-5678-1234567890ab");
 
     characteristic.startNotifications();
 
