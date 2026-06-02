@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SPEED CHECKER</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SPEED CHECKER V1.2</title>
+
+<style>
+body{
+    background:#000;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    color:red;
+}
+
+button{
+    background:red;
+    color:white;
+    border:none;
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:18px;
+    margin:15px;
+}
+
+.card{
+    background:#111;
+    border:1px solid red;
+    border-radius:15px;
+    margin:15px auto;
+    padding:15px;
+    max-width:350px;
+}
+
+.value{
+    font-size:48px;
+    color:#00ff00;
+    font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-<h1>SPEED CHECKER</h1>
+<h1>SPEED CHECKER V1.2</h1>
 
 <button>CONNECT BLE</button>
 
-<h2>RPM</h2>
-<div>0</div>
+<div class="card">
+    <h2>RPM</h2>
+    <div class="value">0</div>
+</div>
 
-<h2>KM/H</h2>
-<div>0.0</div>
+<div class="card">
+    <h2>KM/H</h2>
+    <div class="value">0.0</div>
+</div>
 
-<h2>MAX RPM</h2>
-<div>0</div>
+<div class="card">
+    <h2>MAX RPM</h2>
+    <div class="value">0</div>
+</div>
 
-<h2>MAX KM/H</h2>
-<div>0.0</div>
+<div class="card">
+    <h2>MAX KM/H</h2>
+    <div class="value">0.0</div>
+</div>
 
 </body>
 </html>
