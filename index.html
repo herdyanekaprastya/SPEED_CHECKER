@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>                                                            
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -72,6 +72,81 @@ button{
     <h2>MAX KM/H</h2>
     <div class="value">0.0</div>
 </div>
+<script>
 
+const button = document.querySelector("button");
+const values = document.querySelectorAll(".value");
+
+button.addEventListener("click", async () => {
+
+  try {
+
+    const device =
+      await navigator.bluetooth.requestDevice({
+        filters: [
+          { name: "SPEED_CHECKER" }
+        ],
+        optionalServices: ["1234"]
+      });
+
+    const server =
+      await device.gatt.connect();
+
+    const service =
+      await server.getPrimaryService("1234");
+
+    const characteristic =
+      await service.getCharacteristic("ABCD");
+
+    characteristic.startNotifications();
+
+    characteristic.addEventListener(
+      "characteristicvaluechanged",
+      (event) => {
+
+        const value =
+          new TextDecoder().decode(
+            event.target.value
+          );
+
+        console.log(value);
+
+        const rpm =
+          /RPM=(\d+)/.exec(value);
+
+        const kmh =
+          /KMH=([\d.]+)/.exec(value);
+
+        const maxrpm =
+          /MAXRPM=(\d+)/.exec(value);
+
+        const maxkmh =
+          /MAXKMH=([\d.]+)/.exec(value);
+
+        if(rpm)
+          values[0].innerText = rpm[1];
+
+        if(kmh)
+          values[1].innerText = kmh[1];
+
+        if(maxrpm)
+          values[2].innerText = maxrpm[1];
+
+        if(maxkmh)
+          values[3].innerText = maxkmh[1];
+      }
+    );
+
+    button.innerText = "CONNECTED";
+
+  } catch(err) {
+
+    alert(err);
+
+  }
+
+});
+
+</script>
 </body>
 </html>
