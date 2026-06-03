@@ -79,23 +79,42 @@ const values = document.querySelectorAll(".value");
 
 button.addEventListener("click", async () => {
 
-  try {
+ try {
 
-    const device =
-      await navigator.bluetooth.requestDevice({
-       acceptAllDevices: true,
-        optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
-      });
+  console.log("STEP 1");
 
-    const server =
-      await device.gatt.connect();
+  const device =
+    await navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+      optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
+    });
 
-    const service =
-      await server.getPrimaryService("12345678-1234-1234-1234-1234567890ab");
+  console.log("STEP 2");
 
-    const characteristic =
-      await service.getCharacteristic("abcd1234-5678-1234-5678-1234567890ab");
+  const server =
+    await device.gatt.connect();
 
+  console.log("STEP 3");
+
+  const service =
+    await server.getPrimaryService(
+      "12345678-1234-1234-1234-1234567890ab"
+    );
+
+  console.log("STEP 4");
+
+  const characteristic =
+    await service.getCharacteristic(
+      "abcd1234-5678-1234-5678-1234567890ab"
+    );
+
+  console.log("STEP 5");
+
+} catch(err) {
+
+  console.error("BLE ERROR:", err);
+
+}
     characteristic.startNotifications();
 
     characteristic.addEventListener(
